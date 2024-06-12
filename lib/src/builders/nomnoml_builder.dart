@@ -112,8 +112,11 @@ class NomnomlBuilder implements DiagramBuilder {
     }).join(';\n'));
   }
 
-  String fullClassName(ClassElement element) {
-    final abstractModifier = element.isAbstract ? '<abstract>' : '';
+  String fullClassName(InterfaceElement element) {
+    final abstractModifier =
+        InterfaceElement is ClassElement && (element as ClassElement).isAbstract
+            ? '<abstract>'
+            : '';
     final className = typeName(element, withNullability: false);
     return '$abstractModifier$className';
   }
